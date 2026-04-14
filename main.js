@@ -644,39 +644,10 @@ function initCounters() {
 function initContactForm() {
   const form = $("#contactForm");
   if (!form) return;
-
-  form.addEventListener("submit", async e => {
-    e.preventDefault();
-    const btn     = form.querySelector("button[type=submit]");
-    const success = $("#formSuccess");
+  form.addEventListener("submit", () => {
+    const btn = form.querySelector("button[type=submit]");
     btn.textContent = "Sending\u2026";
     btn.disabled = true;
-
-    try {
-      const res = await fetch("/", {
-        method:  "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body:    new URLSearchParams(new FormData(form)).toString()
-      });
-      if (res.ok) {
-        btn.textContent = "\u2705 Sent!";
-        success.textContent = "\u2705 Message sent! I\u2019ll get back to you soon.";
-        success.classList.add("show");
-        form.reset();
-      } else {
-        throw new Error();
-      }
-    } catch {
-      btn.textContent = "\u274c Error";
-      success.textContent = "Something went wrong. Email me at ram6070246@gmail.com";
-      success.classList.add("show");
-    }
-
-    setTimeout(() => {
-      btn.textContent = "Send Message";
-      btn.disabled = false;
-      success.classList.remove("show");
-    }, 5000);
   });
 }
 
