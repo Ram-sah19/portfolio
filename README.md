@@ -117,4 +117,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
-<p align="center">Designed & Built with ♥ by <strong>Rambilas Sah</strong> · © 2025</p>
+<p align="center">Designed & Built with ♥ by <strong>Rambilas Sah</strong> · © 2026</p>
