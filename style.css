@@ -344,68 +344,135 @@ body {
 }
 .about-card {
   position:relative;
-  width:320px; height:420px;
-  border-radius:24px;
+  width:320px; height:490px;
+  border-radius:28px;
   overflow:hidden;
   transform-style:preserve-3d;
   transition:transform .1s;
-  box-shadow:var(--shadow), var(--glow);
+  background: linear-gradient(160deg, #0f1420 0%, #0a0c12 60%, #0d1018 100%);
+  border:1px solid rgba(201,168,76,.25);
+  box-shadow:
+    0 0 0 1px rgba(201,168,76,.1),
+    0 25px 60px rgba(0,0,0,.8),
+    0 0 60px rgba(201,168,76,.08),
+    inset 0 1px 0 rgba(201,168,76,.15);
 }
 #aboutCanvas {
   position:absolute; inset:0;
   width:100%; height:100%;
+  opacity:.6;
 }
 .about-card-overlay {
   position:absolute; inset:0;
   display:flex; flex-direction:column;
   align-items:center; justify-content:center;
-  gap:12px;
-  background:linear-gradient(180deg,rgba(13,15,20,0) 0%,rgba(13,15,20,.88) 60%);
-  padding:24px;
+  gap:10px;
+  padding:28px 20px;
+  background:linear-gradient(180deg,
+    rgba(10,12,18,.1) 0%,
+    rgba(10,12,18,.4) 40%,
+    rgba(10,12,18,.92) 70%
+  );
 }
+
+/* Avatar */
 .about-avatar-ring {
-  width:90px; height:90px;
+  position:relative;
+  width:190px; height:190px;
   border-radius:50%;
-  background:linear-gradient(135deg,var(--accent),var(--accent2));
   padding:3px;
-  margin-bottom:4px;
+  background:linear-gradient(135deg, #c9a84c, #e8d5a3, #8b6914, #c9a84c);
+  margin-bottom:6px;
+  flex-shrink:0;
 }
-.about-avatar {
+.about-avatar-ring::before {
+  content:'';
+  position:absolute;
+  inset:-6px;
+  border-radius:50%;
+  background:transparent;
+  border:1px solid rgba(201,168,76,.3);
+  animation:ringPulse 2.5s ease-in-out infinite;
+}
+.about-avatar-ring::after {
+  content:'';
+  position:absolute;
+  inset:-14px;
+  border-radius:50%;
+  background:transparent;
+  border:1px solid rgba(201,168,76,.12);
+  animation:ringPulse 2.5s ease-in-out infinite .4s;
+}
+@keyframes ringPulse {
+  0%,100%{ opacity:.4; transform:scale(1); }
+  50%{     opacity:1;  transform:scale(1.04); }
+}
+.about-avatar-img {
   width:100%; height:100%;
   border-radius:50%;
-  background:var(--bg);
-  display:flex; align-items:center; justify-content:center;
-  font-size:2.2rem;
-  font-weight:700;
-  color:var(--white);
+  object-fit:cover;
+  object-position:center top;
+  display:block;
+  position:relative;
+  z-index:1;
+  transform:scale(1.15);
+  filter:contrast(1.1) brightness(0.9) saturate(0.95);
 }
+.avatar-glow {
+  position:absolute;
+  inset:-20px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(201,168,76,.35) 0%, transparent 70%);
+  animation:avatarGlow 2.5s ease-in-out infinite;
+  pointer-events:none;
+  z-index:0;
+}
+@keyframes avatarGlow {
+  0%,100%{ opacity:.5; transform:scale(1); }
+  50%{     opacity:1;  transform:scale(1.1); }
+}
+
 .about-card-name {
-  font-size:1.4rem;
+  font-size:1.3rem;
   font-weight:700;
   color:var(--white);
+  letter-spacing:.02em;
+  text-shadow:0 0 20px rgba(201,168,76,.4);
 }
 .about-card-role {
-  font-size:.85rem;
+  font-size:.8rem;
   color:var(--accent2);
   font-family:var(--mono);
-  letter-spacing:.1em;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  opacity:.85;
 }
 .about-card-stats {
-  display:flex; gap:24px;
-  margin-top:8px;
+  display:flex; gap:16px;
+  margin-top:12px;
+  width:100%;
+  justify-content:center;
 }
-.stat { text-align:center; }
+.stat {
+  text-align:center;
+  background:rgba(201,168,76,.06);
+  border:1px solid rgba(201,168,76,.15);
+  border-radius:12px;
+  padding:10px 12px;
+  flex:1;
+}
 .stat-num {
-  font-size:1.6rem;
+  font-size:1.4rem;
   font-weight:700;
   color:var(--white);
 }
 .stat span { color:var(--accent); font-weight:700; }
 .stat p {
-  font-size:.72rem;
+  font-size:.62rem;
   color:var(--text-muted);
-  margin-top:2px;
+  margin-top:3px;
   font-family:var(--mono);
+  line-height:1.3;
 }
 
 /* About text */
@@ -702,6 +769,15 @@ body {
   font-size:.75rem;
   color:var(--accent);
   font-family:var(--mono);
+  cursor:default;
+  transition:background var(--transition), border-color var(--transition), color var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+.project-tech span:hover {
+  background:rgba(201,168,76,.22);
+  border-color:var(--accent);
+  color:var(--white);
+  transform:translateY(-3px) scale(1.08);
+  box-shadow:0 6px 20px rgba(201,168,76,.3);
 }
 .project-links { display:flex; gap:12px; }
 .proj-btn {
